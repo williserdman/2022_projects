@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-netlify": "^1.0.0-next.84",
 		"@types/three": "^0.146.0",
 		"three": "^0.146.0"
 	}
