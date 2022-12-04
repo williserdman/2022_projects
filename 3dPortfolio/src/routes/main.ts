@@ -38,7 +38,7 @@ function setup() {
 	renderer.domElement.style.top = "0";
 	renderer.domElement.style.left = "0";
 	document.querySelector("#webgl")?.appendChild(renderer.domElement);
-	//document.body.appendChild(document.createElement("div.webgl").appendChild(renderer.domElement));
+	//document.body.appendChild(document.createElement("div.webgl").appendChild(renderer.domElement)); // absolutely NO idea why this doesn't work
 	// renderer.shadowMap.enabled = true;
 
 	camera.position.set(-10, 50, 15);
@@ -49,20 +49,20 @@ function setup() {
 		"laptop/scene.gltf",
 		(gltf) => {
 			console.log("added gltf");
-			//scene.add(gltf.scene);
-			gltf.scene.scale.set(10, 10, 10);
+			scene.add(gltf.scene);
+			gltf.scene.scale.set(100, 100, 100);
 		},
 		(p) => console.log(p),
 		(e) => console.error(e)
 	);
 
-	const screen = makeCSSObject("iframe", 250, 150);
+	const screen = makeCSSObject("iframe", 2500, 1500);
 	// @ts-ignore
 	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
-	screen.position.y += 125;
-	//scene.add(screen);
+	screen.position.y += 1250;
+	scene.add(screen);
 
-	const button = makeCSSObject("button", 75, 20);
+	/* 	const button = makeCSSObject("button", 75, 20);
 	// @ts-ignore
 	button.css3dObject.element.style.border = "2px solid #fa5a85";
 	// @ts-ignore
@@ -75,7 +75,7 @@ function setup() {
 	button.position.z = 10;
 	// @ts-ignore
 	button.css3dObject.element.style.background = "#e64e77";
-	scene.add(button);
+	scene.add(button); */
 
 	// Adds a couple basic lights to the scene
 	const pointLight = new THREE.PointLight(0xffffff);
@@ -90,24 +90,25 @@ function setup() {
 	scene.add(lightHelper, gridHelper);
 
 	// Initial setup for the controls
-	//controls = new OrbitControls(camera, renderer.domElement);
+	controls = new OrbitControls(camera, cssRenderer.domElement);
+
+	camera.position.set(-70, 2350, 3150);
+	camera.rotation.set(-0.64, -0.02, -0.01);
 }
 
 function update(time: number) {
 	requestAnimationFrame(update);
 
-	//controls.update();
+	controls.update();
 
 	//console.log(camera.position, camera.rotation);
-	camera.position.set(-7, 235, 315);
-	camera.rotation.set(-0.64, -0.02, -0.01);
 
 	renderer.render(scene, camera);
 	cssRenderer.render(scene, camera);
 }
 
 export function init() {
-	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
 
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	cssRenderer = new CSS3DRenderer();
