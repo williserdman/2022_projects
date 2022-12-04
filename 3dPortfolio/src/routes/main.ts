@@ -54,6 +54,12 @@ function setup() {
 		(e) => console.error(e)
 	);
 
+	const screen = makeCSSObject("iframe", 250, 150);
+	// @ts-ignore
+	screen.css3dObject.element.src = "https://threejs.org";
+	screen.position.y += 125;
+	scene.add(screen);
+
 	// Adds a couple basic lights to the scene
 	const pointLight = new THREE.PointLight(0xffffff);
 	pointLight.position.set(10, 10, 0);
@@ -70,8 +76,7 @@ function setup() {
 	controls = new OrbitControls(camera, renderer.domElement);
 }
 
-function update(time: any) {
-	console.log(typeof time);
+function update(time: number) {
 	requestAnimationFrame(update);
 
 	controls.update();
