@@ -56,10 +56,11 @@ function setup() {
 		(e) => console.error(e)
 	);
 
-	const screen = makeCSSObject("iframe", 2500, 1500);
+	const screen = makeCSSObject("iframe", 2930, 1700);
 	// @ts-ignore
-	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
-	screen.position.y += 1250;
+	screen.css3dObject.element.src = "http://localhost:5173";
+	screen.position.y = 1075;
+	screen.position.z -= 1040;
 	scene.add(screen);
 
 	/* 	const button = makeCSSObject("button", 75, 20);
@@ -87,7 +88,7 @@ function setup() {
 	// Adds some helpers to the scene
 	const lightHelper = new THREE.PointLightHelper(pointLight);
 	const gridHelper = new THREE.GridHelper(200, 50);
-	scene.add(lightHelper, gridHelper);
+	//scene.add(lightHelper, gridHelper);
 
 	// Initial setup for the controls
 	controls = new OrbitControls(camera, cssRenderer.domElement);
@@ -108,7 +109,7 @@ function update(time: number) {
 }
 
 export function init() {
-	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000);
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 9999);
 
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	cssRenderer = new CSS3DRenderer();
@@ -122,6 +123,7 @@ function makeCSSObject(type: string, width: number, height: number) {
 	const el = document.createElement(type);
 	el.style.width = width + "px";
 	el.style.height = height + "px";
+	//el.style.opacity = "0.999";
 	el.style.boxSizing = "border-box";
 
 	const cssObj = new CSS3DObject(el);
@@ -130,12 +132,12 @@ function makeCSSObject(type: string, width: number, height: number) {
 	obj.add(cssObj);
 
 	const material = new THREE.MeshPhongMaterial({
-		opacity: 0.15,
+		opacity: 0.2,
 		color: new THREE.Color(0x111111),
 		blending: THREE.NoBlending
 		// side	: THREE.DoubleSide,
 	});
-	const geometry = new THREE.BoxGeometry(width, height, 0.1);
+	const geometry = new THREE.BoxGeometry(width, height, 10);
 	const mesh = new THREE.Mesh(geometry, material);
 	mesh.castShadow = true;
 	mesh.receiveShadow = true;
