@@ -8,6 +8,8 @@ let renderer: THREE.WebGLRenderer;
 let cssRenderer: CSS3DRenderer;
 let camera: THREE.PerspectiveCamera;
 
+const SCALE = 50;
+
 const scene = new THREE.Scene();
 
 let controls: OrbitControls;
@@ -50,17 +52,17 @@ function setup() {
 		(gltf) => {
 			console.log("added gltf");
 			scene.add(gltf.scene);
-			gltf.scene.scale.set(100, 100, 100);
+			gltf.scene.scale.set(1 * SCALE, 1 * SCALE, 1 * SCALE);
 		},
 		(p) => console.log(p),
 		(e) => console.error(e)
 	);
 
-	const screen = makeCSSObject("iframe", 2930, 1700);
+	const screen = makeCSSObject("iframe", 29.5 * SCALE, 17.15 * SCALE);
 	// @ts-ignore
-	screen.css3dObject.element.src = "http://localhost:5173";
-	screen.position.y = 1075;
-	screen.position.z -= 1040;
+	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
+	screen.position.y = 10.65 * SCALE;
+	screen.position.z -= 10.65 * SCALE;
 	scene.add(screen);
 
 	/* 	const button = makeCSSObject("button", 75, 20);
@@ -93,7 +95,7 @@ function setup() {
 	// Initial setup for the controls
 	controls = new OrbitControls(camera, cssRenderer.domElement);
 
-	camera.position.set(-70, 2350, 3150);
+	camera.position.set(-0.7 * SCALE, 23.5 * SCALE, 31.5 * SCALE);
 	camera.rotation.set(-0.64, -0.02, -0.01);
 }
 
@@ -109,7 +111,7 @@ function update(time: number) {
 }
 
 export function init() {
-	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 9999);
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 99, 4999);
 
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	cssRenderer = new CSS3DRenderer();
@@ -133,11 +135,11 @@ function makeCSSObject(type: string, width: number, height: number) {
 
 	const material = new THREE.MeshPhongMaterial({
 		opacity: 0.2,
-		color: new THREE.Color(0x111111),
+		color: new THREE.Color(0x010101),
 		blending: THREE.NoBlending
 		// side	: THREE.DoubleSide,
 	});
-	const geometry = new THREE.BoxGeometry(width, height, 10);
+	const geometry = new THREE.BoxGeometry(width, height, 1);
 	const mesh = new THREE.Mesh(geometry, material);
 	mesh.castShadow = true;
 	mesh.receiveShadow = true;
