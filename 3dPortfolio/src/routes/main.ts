@@ -1,4 +1,5 @@
 import * as THREE from "three";
+// @ts-ignore
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
@@ -27,7 +28,8 @@ function setup() {
 	cssRenderer.domElement.style.top = "0";
 	cssRenderer.domElement.style.left = "0";
 	cssRenderer.setSize(window.innerWidth, window.innerHeight);
-	document.body.appendChild(document.createElement("div.css").appendChild(cssRenderer.domElement));
+	//document.body.appendChild(document.createElement("div.css").appendChild(cssRenderer.domElement));
+	document.querySelector("#css")?.appendChild(cssRenderer.domElement);
 
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,8 +37,8 @@ function setup() {
 	renderer.domElement.style.position = "absolute";
 	renderer.domElement.style.top = "0";
 	renderer.domElement.style.left = "0";
-	console.log("doing things");
-	document.body.appendChild(document.createElement("div.webgl").appendChild(renderer.domElement));
+	document.querySelector("#webgl")?.appendChild(renderer.domElement);
+	//document.body.appendChild(document.createElement("div.webgl").appendChild(renderer.domElement));
 	// renderer.shadowMap.enabled = true;
 
 	camera.position.set(-10, 50, 15);
@@ -47,7 +49,7 @@ function setup() {
 		"laptop/scene.gltf",
 		(gltf) => {
 			console.log("added gltf");
-			scene.add(gltf.scene);
+			//scene.add(gltf.scene);
 			gltf.scene.scale.set(10, 10, 10);
 		},
 		(p) => console.log(p),
@@ -56,9 +58,24 @@ function setup() {
 
 	const screen = makeCSSObject("iframe", 250, 150);
 	// @ts-ignore
-	screen.css3dObject.element.src = "https://threejs.org";
+	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
 	screen.position.y += 125;
-	scene.add(screen);
+	//scene.add(screen);
+
+	const button = makeCSSObject("button", 75, 20);
+	// @ts-ignore
+	button.css3dObject.element.style.border = "2px solid #fa5a85";
+	// @ts-ignore
+	button.css3dObject.element.textContent = "Click me!";
+	// @ts-ignore
+	button.css3dObject.element.addEventListener("click", () =>
+		alert("You clicked a <button> element in the DOM!")
+	);
+	button.position.y = 100;
+	button.position.z = 10;
+	// @ts-ignore
+	button.css3dObject.element.style.background = "#e64e77";
+	scene.add(button);
 
 	// Adds a couple basic lights to the scene
 	const pointLight = new THREE.PointLight(0xffffff);
@@ -73,26 +90,30 @@ function setup() {
 	scene.add(lightHelper, gridHelper);
 
 	// Initial setup for the controls
-	controls = new OrbitControls(camera, renderer.domElement);
+	//controls = new OrbitControls(camera, renderer.domElement);
 }
 
 function update(time: number) {
 	requestAnimationFrame(update);
 
-	controls.update();
+	//controls.update();
+
+	//console.log(camera.position, camera.rotation);
+	camera.position.set(-7, 235, 315);
+	camera.rotation.set(-0.64, -0.02, -0.01);
 
 	renderer.render(scene, camera);
 	cssRenderer.render(scene, camera);
 }
 
-export function createScene() {
+export function init() {
 	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	cssRenderer = new CSS3DRenderer();
 
 	setup();
-	update(0);
+	update(performance.now());
 }
 
 function makeCSSObject(type: string, width: number, height: number) {
