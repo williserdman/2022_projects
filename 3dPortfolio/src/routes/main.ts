@@ -46,39 +46,7 @@ function setup() {
 	camera.position.set(-10, 50, 15);
 	camera.rotation.set(-3, 0.75, 3);
 
-	// Loads the office model into the scene
-	new GLTFLoader().load(
-		"laptop/scene.gltf",
-		(gltf) => {
-			console.log("added gltf");
-			scene.add(gltf.scene);
-			gltf.scene.scale.set(1 * SCALE, 1 * SCALE, 1 * SCALE);
-		},
-		(p) => console.log(p),
-		(e) => console.error(e)
-	);
-
-	const screen = makeCSSObject("iframe", 29.5 * SCALE, 17.15 * SCALE);
-	// @ts-ignore
-	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
-	screen.position.y = 10.65 * SCALE;
-	screen.position.z -= 10.65 * SCALE;
-	scene.add(screen);
-
-	/* 	const button = makeCSSObject("button", 75, 20);
-	// @ts-ignore
-	button.css3dObject.element.style.border = "2px solid #fa5a85";
-	// @ts-ignore
-	button.css3dObject.element.textContent = "Click me!";
-	// @ts-ignore
-	button.css3dObject.element.addEventListener("click", () =>
-		alert("You clicked a <button> element in the DOM!")
-	);
-	button.position.y = 100;
-	button.position.z = 10;
-	// @ts-ignore
-	button.css3dObject.element.style.background = "#e64e77";
-	scene.add(button); */
+	scene.add(createLaptop());
 
 	// Adds a couple basic lights to the scene
 	const pointLight = new THREE.PointLight(0xffffff);
@@ -118,6 +86,29 @@ export function init() {
 
 	setup();
 	update(performance.now());
+}
+
+function createLaptop() {
+	const group = new THREE.Group();
+	new GLTFLoader().load(
+		"laptop/scene.gltf",
+		(gltf) => {
+			console.log("added gltf");
+			group.add(gltf.scene);
+			gltf.scene.scale.set(1 * SCALE, 1 * SCALE, 1 * SCALE);
+		},
+		(p) => console.log(p),
+		(e) => console.error(e)
+	);
+
+	const screen = makeCSSObject("iframe", 29.5 * SCALE, 17.15 * SCALE);
+	// @ts-ignore
+	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
+	screen.position.y = 10.65 * SCALE;
+	screen.position.z -= 10.65 * SCALE;
+	group.add(screen);
+
+	return group;
 }
 
 function makeCSSObject(type: string, width: number, height: number) {
