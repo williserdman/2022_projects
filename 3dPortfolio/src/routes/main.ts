@@ -8,7 +8,7 @@ let renderer: THREE.WebGLRenderer;
 let cssRenderer: CSS3DRenderer;
 let camera: THREE.PerspectiveCamera;
 
-const SCALE = 50;
+const SCALE = 40;
 
 const scene = new THREE.Scene();
 
@@ -48,38 +48,55 @@ function setup() {
 
 	scene.add(createLaptop());
 
+	new GLTFLoader().load(
+		"office_desk/scene.gltf",
+		(gltf) => {
+			console.log("Desk Added");
+			scene.add(gltf.scene);
+			console.log(scene);
+			gltf.scene.scale.set(1.5 * SCALE, 1.5 * SCALE, 1.5 * SCALE);
+			gltf.scene.position.set(-52 * SCALE, -46.6 * SCALE, 12 * SCALE);
+		},
+		(p) => console.log(p),
+		(e) => console.error(e)
+	);
+
 	// Adds a couple basic lights to the scene
 	const pointLight = new THREE.PointLight(0xffffff);
 	pointLight.position.set(10, 10, 0);
-	const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-	const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+	const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+	const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
 	scene.add(pointLight, ambientLight, directionalLight);
 
 	// Adds some helpers to the scene
 	const lightHelper = new THREE.PointLightHelper(pointLight);
 	const gridHelper = new THREE.GridHelper(200, 50);
-	//scene.add(lightHelper, gridHelper);
+	scene.add(lightHelper, gridHelper);
 
 	// Initial setup for the controls
 	controls = new OrbitControls(camera, cssRenderer.domElement);
 
-	camera.position.set(-0.7 * SCALE, 23.5 * SCALE, 31.5 * SCALE);
-	camera.rotation.set(-0.64, -0.02, -0.01);
+	//camera.position.set(-0.7 * SCALE, 23.5 * SCALE, 31.5 * SCALE);
+	//camera.rotation.set(-0.64, -0.02, -0.01);
+
+	//camera.position.set(0, 440, 120);
+	camera.position.set(90, 380, 260);
+	camera.rotation.set(-0.02, 0.14, 0.015);
 }
 
 function update(time: number) {
 	requestAnimationFrame(update);
 
-	controls.update();
+	//controls.update();
 
-	//console.log(camera.position, camera.rotation);
+	console.log(camera.position, camera.rotation);
 
 	renderer.render(scene, camera);
 	cssRenderer.render(scene, camera);
 }
 
 export function init() {
-	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 99, 4999);
+	camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 99, 7999);
 
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	cssRenderer = new CSS3DRenderer();
@@ -103,7 +120,7 @@ function createLaptop() {
 
 	const screen = makeCSSObject("iframe", 29.5 * SCALE, 17.15 * SCALE);
 	// @ts-ignore
-	screen.css3dObject.element.src = "https://henryheffernan-os.vercel.app/";
+	screen.css3dObject.element.src = "screen";
 	screen.position.y = 10.65 * SCALE;
 	screen.position.z -= 10.65 * SCALE;
 	group.add(screen);
