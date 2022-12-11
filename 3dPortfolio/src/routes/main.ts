@@ -120,7 +120,7 @@ function createLaptop() {
 
 	const screen = makeCSSObject("iframe", 29.5 * SCALE, 17.15 * SCALE);
 	// @ts-ignore
-	screen.css3dObject.element.src = "screen";
+	screen.css3dObject.element.src = "http://winxp.vercel.app";
 	screen.position.y = 10.65 * SCALE;
 	screen.position.z -= 10.65 * SCALE;
 	group.add(screen);
