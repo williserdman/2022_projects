@@ -26,6 +26,8 @@
 	"type": "module",
 	"dependencies": {
 		"@types/three": "^0.146.0",
+		"bulma": "^0.9.4",
+		"sass": "^1.56.2",
 		"three": "^0.147.0"
 	}
 }
