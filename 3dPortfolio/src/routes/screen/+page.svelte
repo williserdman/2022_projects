@@ -1,11 +1,13 @@
 <script lang="ts">
 	import "bulma";
+	import FooterNav from "$lib/FooterNav.svelte";
+	import MainOS from "$lib/MainOS.svelte";
 	let mouse = { x: 0, y: 0, startX: 0, startY: 0 };
 	let selector: HTMLDivElement | null = null;
 	let canvas: HTMLCanvasElement | null;
 
 	function mouseMoved(event: object) {
-		console.log("move event");
+		//console.log("move event");
 		//@ts-ignore
 		mouse.x = event.clientX;
 		//@ts-ignore
@@ -19,15 +21,17 @@
 		}
 	}
 	function mouseUp() {
-		console.log("up event");
+		//console.log("up event");
 		if (selector) selector.hidden = true;
 		if (canvas) canvas.style.cursor = "default";
 	}
 	function click() {
-		console.log("click");
+		//console.log("click");
 		mouse.startX = mouse.x;
 		mouse.startY = mouse.y;
 		if (selector) {
+			selector.style.width = "0";
+			selector.style.height = "0";
 			selector.hidden = false;
 			selector.style.left = mouse.x + "px";
 			selector.style.top = mouse.y + "px";
@@ -38,6 +42,9 @@
 
 <html lang="html" style="overflow: hidden;">
 	<main id="background" class="hero is-fullheight">
+		<div class="prevent-select" style="position: absolute; background-color: transparent">
+			<MainOS />
+		</div>
 		<div class="selector" bind:this={selector} hidden />
 		<canvas
 			class="is-fullheight hero-body p-0"
@@ -47,10 +54,23 @@
 			on:mouseup={mouseUp}
 			on:mouseleave={mouseUp}
 		/>
+		<footer
+			class="hero-footer has-shadow"
+			style="height: 3rem; background-color: rgba(255, 255, 255, 0.85);"
+		>
+			<div class="prevent-select">
+				<FooterNav />
+			</div>
+		</footer>
 	</main>
 </html>
 
 <style>
+	.prevent-select {
+		-webkit-user-select: none; /* Safari */
+		-ms-user-select: none; /* IE 10 and IE 11 */
+		user-select: none; /* Standard syntax */
+	}
 	#background {
 		background: lightgray url(background.jpg) center / cover;
 	}
@@ -64,5 +84,8 @@
 		background-color: rgba(255, 255, 255, 0.3);
 		border: 1px dotted gray;
 		position: absolute;
+	}
+	footer {
+		box-shadow: -10px 0 40px -2px;
 	}
 </style>
