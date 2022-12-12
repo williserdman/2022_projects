@@ -38,7 +38,7 @@
 
 <html lang="html" style="overflow: hidden;">
 	<main id="background" class="hero is-fullheight">
-		<div class="selector" bind:this={selector} />
+		<div class="selector" bind:this={selector} hidden />
 		<canvas
 			class="is-fullheight hero-body p-0"
 			bind:this={canvas}
@@ -61,7 +61,8 @@
 	}
 
 	.selector {
-		background-color: rgba(1, 1, 1, 0.5);
+		background-color: rgba(255, 255, 255, 0.3);
+		border: 1px dotted gray;
 		position: absolute;
 	}
 </style>
