@@ -2,12 +2,13 @@
 	import "bulma";
 	import FooterNav from "$lib/FooterNav.svelte";
 	import MainOS from "$lib/MainOS.svelte";
+
 	let mouse = { x: 0, y: 0, startX: 0, startY: 0 };
 	let selector: HTMLDivElement | null = null;
 	let canvas: HTMLCanvasElement | null;
+	let svelteElements: String[] = [];
 
 	function mouseMoved(event: object) {
-		//console.log("move event");
 		//@ts-ignore
 		mouse.x = event.clientX;
 		//@ts-ignore
@@ -38,12 +39,18 @@
 			if (canvas) canvas.style.cursor = "crosshair";
 		}
 	}
+	function handleAppClick(event: object) {
+		//@ts-ignore
+		const type: String = event.detail.type;
+		svelteElements.push(type);
+		svelteElements = svelteElements; // so the jit compiler knows that it's chagned
+	}
 </script>
 
 <html lang="html" style="overflow: hidden;">
 	<main id="background" class="hero is-fullheight">
 		<div class="prevent-select" style="position: absolute; background-color: transparent">
-			<MainOS />
+			<MainOS bind:svelteElements />
 		</div>
 		<div class="selector" bind:this={selector} hidden />
 		<canvas
@@ -59,7 +66,7 @@
 			style="height: 3rem; background-color: rgba(255, 255, 255, 0.85);"
 		>
 			<div class="prevent-select" style="height: 100%;">
-				<FooterNav />
+				<FooterNav on:itemClick={handleAppClick} />
 			</div>
 		</footer>
 	</main>
