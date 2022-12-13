@@ -58,7 +58,7 @@
 			class="hero-footer has-shadow"
 			style="height: 3rem; background-color: rgba(255, 255, 255, 0.85);"
 		>
-			<div class="prevent-select">
+			<div class="prevent-select" style="height: 100%;">
 				<FooterNav />
 			</div>
 		</footer>
@@ -78,6 +78,7 @@
 	canvas {
 		border: 10px solid transparent;
 		position: relative;
+		border-bottom: 0;
 	}
 
 	.selector {
