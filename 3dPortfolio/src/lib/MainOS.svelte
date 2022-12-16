@@ -1,13 +1,11 @@
 <script lang="ts">
-	//@ts-ingore
 	import AppletWrapper from "./AppletWrapper.svelte";
-	export let svelteElements: String[];
-	//$: console.log(svelteElements);
+	import { openApps } from "./modules/stores";
 </script>
 
 <html lang="html">
 	<div class="apps">
-		{#each svelteElements as s}
+		{#each $openApps as s}
 			<AppletWrapper type={s} />
 		{/each}
 	</div>
@@ -17,7 +15,11 @@
 <style>
 	html {
 		background-color: transparent;
+		width: 100%;
+		height: 100%;
 	}
 	.apps {
+		width: 100%;
+		height: 100%;
 	}
 </style>

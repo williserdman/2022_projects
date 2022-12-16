@@ -49,8 +49,8 @@
 
 <html lang="html" style="overflow: hidden;">
 	<main id="background" class="hero is-fullheight">
-		<div class="prevent-select" style="position: absolute; background-color: transparent">
-			<MainOS bind:svelteElements />
+		<div class="prevent-select" style="position: absolute; background-color: transparent;">
+			<MainOS />
 		</div>
 		<div class="selector" bind:this={selector} hidden />
 		<canvas

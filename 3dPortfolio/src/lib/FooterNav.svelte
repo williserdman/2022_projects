@@ -1,16 +1,36 @@
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
-	const dispatch = createEventDispatcher();
+	import { openApps } from "./modules/stores";
+
+	const defaultParams = {
+		// have to pass in type before spreading these props
+		width: "50rem",
+		height: "50rem",
+		minimized: false
+	};
+
 	function handle(type: String) {
-		dispatch("itemClick", {
-			type: type
-		});
+		//@ts-ignore
+		if (!$openApps.includes(type)) {
+			//@ts-ignore
+			$openApps.push(type);
+			$openApps = $openApps;
+		}
+	}
+
+	let startButtonEl: HTMLDivElement, fileExplorerEl: HTMLDivElement, settingsEl: HTMLDivElement;
+	$: {
+		//@ts-ignore
+		if ($openApps.includes("start")) startButtonEl.style.background = "lightgrey";
+		//@ts-ignore
+		if ($openApps.includes("projects")) fileExplorerEl.style.background = "lightgrey";
+		//@ts-ignore
+		if ($openApps.includes("settings")) settingsEl.style.background = "lightgrey";
 	}
 </script>
 
 <html lang="html" style="max-height: inherit;">
 	<div class="my-cols">
-		<div class="my-col">
+		<div class="my-col" bind:this={startButtonEl}>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<img
 				draggable="false"
@@ -20,7 +40,7 @@
 				style="width; 2rem; height: 2rem;"
 			/>
 		</div>
-		<div class="my-col">
+		<div class="my-col" bind:this={fileExplorerEl}>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<img
 				draggable="false"
@@ -30,7 +50,7 @@
 				style="width; 2rem; height: 2rem;"
 			/>
 		</div>
-		<div class="my-col">
+		<div class="my-col" bind:this={settingsEl}>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<img
 				draggable="false"
@@ -45,7 +65,7 @@
 
 <style>
 	* {
-		background-color: transparent;
+		/* background-color: transparent; */
 		height: 100%;
 	}
 	.my-cols {
@@ -60,6 +80,8 @@
 		padding-bottom: 0.5rem;
 		padding-left: 0.5rem;
 		padding-right: 0.5rem;
+		margin-left: 0.2rem;
+		margin-right: 0.2rem;
 	}
 	.my-col:hover {
 		background-color: lightblue;
