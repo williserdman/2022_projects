@@ -8,9 +8,10 @@
 	console.log(width, height, minimized);
 	let moving = false;
 
-	function mouseDownTop() {
+	function mouseDownTop(e: object) {
 		console.log("click 1");
 		moving = true;
+		e.stopPropagation();
 	}
 	function mouseUpTop() {
 		moving = false;
@@ -52,5 +53,6 @@ bottom stuff from applet (if needed idk yet) -->
 		width: 400px;
 		height: 400px;
 		background-color: rgba(0, 0, 100, 0.5);
+		z-index: 1;
 	}
 </style>

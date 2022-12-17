@@ -49,8 +49,13 @@
 
 <html lang="html" style="overflow: hidden;">
 	<main id="background" class="hero is-fullheight">
-		<div class="prevent-select" style="position: absolute; background-color: transparent;">
-			<MainOS />
+		<div class="prevent-select main-os">
+			<MainOS
+				on:mousedown={click}
+				on:mousemove={mouseMoved}
+				on:mouseup={mouseUp}
+				on:mouseleave={mouseUp}
+			/>
 		</div>
 		<div class="selector" bind:this={selector} hidden />
 		<canvas
@@ -95,5 +100,12 @@
 	}
 	footer {
 		box-shadow: -10px 0 40px -2px;
+	}
+	.main-os {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		margin-top: -3rem;
+		z-index: 1;
 	}
 </style>

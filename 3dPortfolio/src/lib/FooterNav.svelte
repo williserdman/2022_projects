@@ -3,8 +3,8 @@
 
 	const defaultParams = {
 		// have to pass in type before spreading these props
-		width: "50rem",
-		height: "50rem",
+		width: 50,
+		height: 50,
 		minimized: false
 	};
 
