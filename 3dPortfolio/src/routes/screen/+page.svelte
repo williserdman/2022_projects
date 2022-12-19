@@ -45,10 +45,15 @@
 		svelteElements.push(type);
 		svelteElements = svelteElements; // so the jit compiler knows that it's chagned
 	}
+	function setBackground(e: any) {
+		console.log(e);
+		console.log(typeof e);
+	}
 </script>
 
 <html lang="html" style="overflow: hidden;">
-	<main id="background" class="hero is-fullheight">
+	<main id="background" class="hero is-fullheight" on:loadstart={setBackground}>
+		<!-- have to fix this background not working -->
 		<div class="prevent-select main-os">
 			<MainOS
 				on:mousedown={click}
