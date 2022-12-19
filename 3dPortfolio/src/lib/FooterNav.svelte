@@ -1,18 +1,16 @@
 <script lang="ts">
 	import { openApps } from "./modules/stores";
 
-	const defaultParams = {
-		// have to pass in type before spreading these props
-		width: 50,
-		height: 50,
-		minimized: false
-	};
-
-	function handle(type: String) {
+	function handle(type: string) {
 		//@ts-ignore
-		if (!$openApps.includes(type)) {
+		if (!$openApps.some((v) => v.type == type)) {
 			//@ts-ignore
-			$openApps.push(type);
+			console.log($openApps.length);
+			$openApps.push({
+				type: type,
+				focus: $openApps.length,
+				minimized: false
+			});
 			$openApps = $openApps;
 		}
 	}
@@ -20,11 +18,11 @@
 	let startButtonEl: HTMLDivElement, fileExplorerEl: HTMLDivElement, settingsEl: HTMLDivElement;
 	$: {
 		//@ts-ignore
-		if ($openApps.includes("start")) startButtonEl.style.background = "lightgrey";
+		if ($openApps.some((v) => v.type == "start")) startButtonEl.style.background = "lightgrey";
 		//@ts-ignore
-		if ($openApps.includes("projects")) fileExplorerEl.style.background = "lightgrey";
+		if ($openApps.some((v) => v.type == "projects")) fileExplorerEl.style.background = "lightgrey";
 		//@ts-ignore
-		if ($openApps.includes("settings")) settingsEl.style.background = "lightgrey";
+		if ($openApps.some((v) => v.type == "settings")) settingsEl.style.background = "lightgrey";
 	}
 </script>
 

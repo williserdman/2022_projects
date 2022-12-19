@@ -1,3 +1,4 @@
 import { writable } from "svelte/store";
 
-export const openApps = writable([]);
+let innerA: { type: string; focus: number; minimized: boolean }[] = [];
+export const openApps = writable(innerA);

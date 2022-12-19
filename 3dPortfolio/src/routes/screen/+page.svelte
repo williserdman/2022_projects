@@ -5,7 +5,7 @@
 
 	let mouse = { x: 0, y: 0, startX: 0, startY: 0 };
 	let selector: HTMLDivElement | null = null;
-	let canvas: HTMLCanvasElement | null;
+	let canvas: HTMLElement | null;
 	let svelteElements: String[] = [];
 
 	function mouseMoved(event: object) {
@@ -22,12 +22,12 @@
 		}
 	}
 	function mouseUp() {
-		//console.log("up event");
 		if (selector) selector.hidden = true;
 		if (canvas) canvas.style.cursor = "default";
 	}
 	function click() {
-		//console.log("click");
+		//@ts-ignore
+		canvas = this;
 		mouse.startX = mouse.x;
 		mouse.startY = mouse.y;
 		if (selector) {
@@ -60,7 +60,6 @@
 		<div class="selector" bind:this={selector} hidden />
 		<canvas
 			class="is-fullheight hero-body p-0"
-			bind:this={canvas}
 			on:mousedown={click}
 			on:mousemove={mouseMoved}
 			on:mouseup={mouseUp}

@@ -7,7 +7,7 @@
 	<div class="apps">
 		{#each $openApps as s}
 			<div class="app">
-				<AppletWrapper type={s} />
+				<AppletWrapper {...{ ...s, width: 500, height: 500 }} bind:focus={s.focus} />
 			</div>
 		{/each}
 	</div>
