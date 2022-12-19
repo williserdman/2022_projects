@@ -5,10 +5,16 @@
 		//@ts-ignore
 		if (!$openApps.some((v) => v.type == type)) {
 			//@ts-ignore
-			console.log($openApps.length);
 			$openApps.push({
 				type: type,
-				focus: $openApps.length,
+				focus: (() => {
+					// messy but makes focus the greatest val out there
+					let m = -1;
+					$openApps.forEach((i) => {
+						if (i.focus > m) m = i.focus;
+					});
+					return ++m;
+				})(),
 				minimized: false
 			});
 			$openApps = $openApps;
