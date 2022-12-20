@@ -52,8 +52,7 @@
 </script>
 
 <html lang="html" style="overflow: hidden;">
-	<main id="background" class="hero is-fullheight" on:loadstart={setBackground}>
-		<!-- have to fix this background not working -->
+	<main id="background" class="hero is-fullheight">
 		<div class="prevent-select main-os">
 			<MainOS
 				on:mousedown={click}
@@ -88,7 +87,7 @@
 		user-select: none; /* Standard syntax */
 	}
 	#background {
-		background: lightgray url(background.jpg) center / cover;
+		background: lightgray url(/background.jpg) center / cover;
 	}
 
 	canvas {
