@@ -88,9 +88,9 @@
 		margin-right: 0.2rem;
 	}
 	.my-col:hover {
-		background-color: lightblue;
+		background-color: lightblue !important; /* needed to overrule the js */
 	}
 	.my-col:active {
-		background-color: white;
+		background-color: blue !important;
 	}
 </style>

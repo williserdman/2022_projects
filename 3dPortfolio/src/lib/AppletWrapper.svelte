@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { openApps } from "./modules/stores";
-	export const type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
-	export let width: number = 500;
-	export let height: number = 500;
+	export let type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
+	export let width: number = 800;
+	export let height: number = 600;
 	export let minimized: boolean = false;
 	export let focus: number;
 	export let left = 100;
@@ -41,6 +41,7 @@
 		//@ts-ignore
 		e.stopPropagation();
 	}
+	console.log($openApps);
 </script>
 
 <!-- top nav area of applet 
@@ -56,16 +57,21 @@ bottom stuff from applet (if needed idk yet) -->
 	on:mousedown={mainClick}
 >
 	<div class="top" on:mousedown={mouseDownTop} on:mouseup={mouseUpTop} />
-	<main />
+	<main>
+		{#if type == "projects"}
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<iframe src="projects" style="width: {width}px; height: {height}px;" />
+		{/if}
+	</main>
 </html>
 
 <svelte:window on:mousemove={mouseMoveTop} on:mouseup={mouseUpTop} />
 
 <style>
 	.top {
-		height: 50px;
+		height: 30px;
 		width: 100%;
-		background-color: white;
+		background-color: lightgrey;
 	}
 	html {
 		position: relative;
