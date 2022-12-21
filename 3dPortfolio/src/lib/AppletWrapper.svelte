@@ -18,6 +18,7 @@
 	function mouseUpTop() {
 		moving = false;
 	}
+	document.addEventListener("mouseup", mouseUpTop);
 	function mouseMoveTop(e: object) {
 		if (moving) {
 			//@ts-ignore
@@ -60,12 +61,12 @@ bottom stuff from applet (if needed idk yet) -->
 	<main>
 		{#if type == "projects"}
 			<!-- svelte-ignore a11y-missing-attribute -->
-			<iframe src="projects" style="width: {width}px; height: {height}px;" />
+			<iframe src="screen/projects" style="width: {width}px; height: {height}px;" />
 		{/if}
 	</main>
 </html>
 
-<svelte:window on:mousemove={mouseMoveTop} on:mouseup={mouseUpTop} />
+<svelte:window on:mousemove={mouseMoveTop} on:mouseup={mouseUpTop} on:mouseleave={mouseUpTop} />
 
 <style>
 	.top {
