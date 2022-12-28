@@ -51,13 +51,18 @@ if things from svelte
 
 bottom stuff from applet (if needed idk yet) -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+	class="top"
+	style="top: {top}px; left: {left}px"
+	on:mousedown={mouseDownTop}
+	on:mouseup={mouseUpTop}
+/>
 <html
 	lang="html"
 	style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {focus + 1};"
 	hidden={minimized}
 	on:mousedown={mainClick}
 >
-	<div class="top" on:mousedown={mouseDownTop} on:mouseup={mouseUpTop} />
 	<main>
 		{#if type == "projects"}
 			<!-- svelte-ignore a11y-missing-attribute -->
@@ -70,6 +75,7 @@ bottom stuff from applet (if needed idk yet) -->
 
 <style>
 	.top {
+		position: relative;
 		height: 30px;
 		width: 100%;
 		background-color: lightgrey;
@@ -77,5 +83,6 @@ bottom stuff from applet (if needed idk yet) -->
 	html {
 		position: relative;
 		background-color: rgba(0, 0, 100, 0.5);
+		overflow: hidden;
 	}
 </style>

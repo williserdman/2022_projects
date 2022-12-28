@@ -23,14 +23,14 @@
 			desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quaerat exercitationem, maiores tenetur incidunt impedit, molestias vero dolorem, corrupti ex adipisci quam iure doloribus. Ut consequatur fugit optio quae nostrum!",
 			abrDesc: "short desc",
 			link: "https://threejs.org/",
-			githubLink: ""
+			githubLink: "https://github.com/williserdman"
 		},
 		{
 			title: "title",
 			desc: " no lorem",
 			abrDesc: "short desc",
 			link: "https://threejs.org/",
-			githubLink: ""
+			githubLink: "https://github.com/williserdman"
 		}
 	];
 
@@ -64,7 +64,19 @@
 							src={activeProject.link}
 							frameborder=""
 						/>
-						<p>{activeProject.desc}</p>
+						<div class="bottom-half-rhs">
+							<div class="is-flex p-6">
+								<p class="mr-6">{activeProject.desc}</p>
+								<div class="icons-v-stacked">
+									<a href={activeProject.githubLink} target="_blank" rel="noreferrer">
+										<img class="click-icons" src="/github_icon.png" alt="github" />
+									</a>
+									<a href={activeProject.link} target="_blank" rel="noreferrer">
+										<img class="click-icons" src="/new_tab_icon.png" alt="preview project" />
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				{:else}
 					<div>
@@ -92,5 +104,11 @@
 	.proj-prev {
 		width: 90%;
 		height: 50%;
+	}
+	.click-icons {
+		width: 40px;
+		height: 40px;
+		min-width: 40px;
+		min-height: 40px;
 	}
 </style>
