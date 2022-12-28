@@ -40,7 +40,7 @@
 </script>
 
 <html lang="html" style="overflow: hidden;">
-	<div class="columns m-0" style="height: 100%;">
+	<div class="columns m-0 is-mobile" style="height: 100%;">
 		<div style="height: 100%; overflow: auto;" class="column is-one-third p-5 rhs-shadow">
 			{#each projects as project}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->

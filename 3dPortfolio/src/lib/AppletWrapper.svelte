@@ -10,7 +10,9 @@
 	let moving = false;
 
 	function mouseDownTop(e: object) {
-		console.log("click 1");
+		//console.log("click 1");
+		//@ts-ignore
+		e.stopPropagation();
 		moving = true;
 		//@ts-ignore
 		mainClick({ ...e, target: e.target.parentElement }); // propogation stopped in here
@@ -18,7 +20,6 @@
 	function mouseUpTop() {
 		moving = false;
 	}
-	document.addEventListener("mouseup", mouseUpTop);
 	function mouseMoveTop(e: object) {
 		if (moving) {
 			//@ts-ignore
@@ -39,8 +40,14 @@
 		console.log($openApps);
 		//@ts-ignore
 		e.target.style["z-index"] = focus;
-		//@ts-ignore
-		e.stopPropagation();
+
+		try {
+			//@ts-ignore
+			e.stopPropagation();
+		} catch (err) {
+			// when e is passed from the clickTop function, it doesn't have a stopPropogation function
+			//console.error(err);
+		}
 	}
 	console.log($openApps);
 </script>

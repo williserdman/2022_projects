@@ -26,6 +26,7 @@
 		if (canvas) canvas.style.cursor = "default";
 	}
 	function click() {
+		console.log("firing main");
 		//@ts-ignore
 		canvas = this;
 		mouse.startX = mouse.x;
@@ -110,5 +111,8 @@
 		height: 100%;
 		margin-top: -3rem;
 		z-index: 1;
+	}
+	* {
+		overflow: hidden;
 	}
 </style>

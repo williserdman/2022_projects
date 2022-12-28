@@ -71,6 +71,7 @@
 	* {
 		/* background-color: transparent; */
 		height: 100%;
+		overflow: hidden;
 	}
 	.my-cols {
 		display: flex;
