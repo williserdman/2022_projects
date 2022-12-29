@@ -64,17 +64,19 @@
 			>
 				{#if activeProject}
 					<div style="height: 100%; width: 100%;">
-						<p class="mb-6">
+						<p class="">
 							Please note: Preview may not render properly due to small viewport size. I would
 							encourage you to click the button below to open the project in a new tab.
 						</p>
-						<iframe
-							style="border: 10px solid darkgrey; background-color: lightgrey;"
-							class="proj-prev"
-							title={activeProject.title}
-							src={activeProject.link}
-							frameborder=""
-						/>
+						<div class="i-holder">
+							<iframe
+								style="border: 10px solid darkgrey; background-color: lightgrey;"
+								class="proj-prev"
+								title={activeProject.title}
+								src={activeProject.link}
+								frameborder=""
+							/>
+						</div>
 						<div class="bottom-half-rhs">
 							<div class="is-flex p-6">
 								<p class="mr-6">{activeProject.desc}</p>
@@ -112,9 +114,16 @@
 		height: 100%;
 		box-shadow: 3px 0px 10px lightgrey;
 	}
-	.proj-prev {
+	.i-holder {
+		position: relative;
 		width: 90%;
-		height: 50%;
+		height: 60%;
+	}
+	.proj-prev {
+		position: absolute;
+		width: 1920px;
+		height: 1080px;
+		transform: translate(-47.5%, -25%) scale(0.4);
 	}
 	.click-icons {
 		width: 40px;
