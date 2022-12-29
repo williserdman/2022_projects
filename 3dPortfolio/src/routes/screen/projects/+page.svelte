@@ -1,6 +1,10 @@
 <script lang="ts">
 	import "bulma";
 
+	/* todo: fix bug where if you start dragging navbar then end up inside the app the click doesnt stop, ideas: add delay, add object that covers app while dragging 
+				add more projects 
+				might be able to render iframes at a certain resolution (1080p for instance) then use css scale to make them fit in the right place */
+
 	interface Project {
 		title: string;
 		desc: string;
@@ -53,16 +57,20 @@
 				</div>
 			{/each}
 		</div>
-		<div class="column" style="position: relative; width: 100%; height: 100%; ">
+		<div class="column" style="position: relative; width: 100%; height: 100%; overflow: auto;">
 			<div
 				class="has-text-centered"
 				style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;"
 			>
 				{#if activeProject}
 					<div style="height: 100%; width: 100%;">
+						<p class="mb-6">
+							Please note: Preview may not render properly due to small viewport size. I would
+							encourage you to click the button below to open the project in a new tab.
+						</p>
 						<iframe
 							style="border: 10px solid darkgrey; background-color: lightgrey;"
-							class="proj-prev m-6"
+							class="proj-prev"
 							title={activeProject.title}
 							src={activeProject.link}
 							frameborder=""

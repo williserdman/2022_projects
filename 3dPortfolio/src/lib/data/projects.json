@@ -1,25 +1,25 @@
 {
 	"data": [
 		{
-			"title": "title",
-			"desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quaerat exercitationem, maiores tenetur incidunt impedit, molestias vero dolorem, corrupti ex adipisci quam iure doloribus. Ut consequatur fugit optio quae nostrum!",
-			"abrDesc": "short desc",
-			"link": "https://threejs.org/",
-			"githubLink": "https://github.com/williserdman"
+			"title": "Brick Breaker",
+			"desc": "This Brick Breaker game is a reimagination of the classic arcade game, built using JavaScript and the HTML5 canvas. It was one of my first projects using JavaScript and was created as a way to become more familiar with the language. The game features hand-designed levels and is built in a way that allows for easy creation of future levels using a JSON file.",
+			"abrDesc": "Brick breaker game in JS and HTML canvas",
+			"link": "https://eager-hawking-5575c6.netlify.app/",
+			"githubLink": "https://github.com/williserdman/webdevelopment/tree/main/FirstProjects/games/brick_breaker"
 		},
 		{
-			"title": "title",
-			"desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quaerat exercitationem, maiores tenetur incidunt impedit, molestias vero dolorem, corrupti ex adipisci quam iure doloribus. Ut consequatur fugit optio quae nostrum!",
-			"abrDesc": "short desc",
-			"link": "https://threejs.org/",
-			"githubLink": "https://github.com/williserdman"
+			"title": "Stack Builder",
+			"desc": "This is a small game that was inspired by a popular mobile game. It was built using THREE.js and the cannon physics engine to ensure that the particles fall realistically. The game is written in TypeScript and is fully playable - my high score is 27. .",
+			"abrDesc": "Block stacking 3D game w/ physics engine",
+			"link": "https://silly-torvalds-4e6a47.netlify.app/",
+			"githubLink": "https://github.com/williserdman/webdevelopment/tree/main/CurrentProjects/MostlyJS/physics_ts"
 		},
 		{
-			"title": "title",
-			"desc": " no lorem",
-			"abrDesc": "short desc",
-			"link": "https://threejs.org/",
-			"githubLink": "https://github.com/williserdman"
+			"title": "Real time chat application w/ React",
+			"desc": "Had a lot of fun building this little application. This is a full-stack application that uses firebase on the backend to store messages and for user authentication. On the fontend I used react, and as I type out this description I'm realizing that I never completely finish stylizing some parts of the chat, but the rest is functional. I promise!",
+			"abrDesc": "Real time chat application that uses Firebase (backend) and React (frontend)",
+			"link": "https://goofy-khorana-0fd1fa.netlify.app/",
+			"githubLink": "https://github.com/williserdman/webdevelopment/tree/main/OtherLearning/react/ChatReactApp"
 		}
 	]
 }

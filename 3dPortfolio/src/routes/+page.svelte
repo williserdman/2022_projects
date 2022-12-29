@@ -7,8 +7,10 @@
 	});
 </script>
 
-<div id="css" />
-<div id="webgl" />
+<html lang="html">
+	<div id="css" />
+	<div id="webgl" />
+</html>
 
 <style>
 	#webgl {
@@ -17,6 +19,10 @@
 	body {
 		background-color: #ffffff;
 		margin: 0;
+		overflow: hidden;
+	}
+
+	html {
 		overflow: hidden;
 	}
 
