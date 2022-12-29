@@ -10,7 +10,10 @@
 	}
 
 	let activeProject: Project | null = null;
-	const projects: Project[] = [
+	//@ts-ignore
+	import { data as projects } from "$lib/data/projects.json";
+
+	/* const projects: Project[] = [
 		{
 			title: "title",
 			desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quaerat exercitationem, maiores tenetur incidunt impedit, molestias vero dolorem, corrupti ex adipisci quam iure doloribus. Ut consequatur fugit optio quae nostrum!",
@@ -32,7 +35,7 @@
 			link: "https://threejs.org/",
 			githubLink: "https://github.com/williserdman"
 		}
-	];
+	]; */
 
 	function setPreview(project: Project) {
 		activeProject = project;
