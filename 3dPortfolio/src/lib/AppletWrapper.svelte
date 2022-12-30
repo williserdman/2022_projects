@@ -2,6 +2,14 @@
 	import { openApps } from "./modules/stores";
 	export let type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
 	export let width: number = 800;
+	let ratio: number, bigHeight: number, bigWidth: number;
+	$: {
+		ratio = height / width;
+		bigWidth = 1280;
+		bigHeight = bigWidth * ratio;
+		ratio = height / bigHeight;
+		// console.log(ratio);
+	}
 	export let height: number = 600;
 	export let minimized: boolean = false;
 	export let focus: number;
@@ -73,7 +81,12 @@ bottom stuff from applet (if needed idk yet) -->
 	<main>
 		{#if type == "projects"}
 			<!-- svelte-ignore a11y-missing-attribute -->
-			<iframe src="screen/projects" style="width: {width}px; height: {height}px;" />
+			<iframe
+				src="screen/projects"
+				style="width: {bigWidth}px; height: {bigHeight}px; transform: translate(-{(bigWidth -
+					width) /
+					2}px, -{(bigHeight - height) / 2}px) scale({ratio});"
+			/>
 		{/if}
 	</main>
 </html>

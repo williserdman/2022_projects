@@ -117,7 +117,7 @@
 	.i-holder {
 		position: relative;
 		width: 90%;
-		height: 60%;
+		height: 70%;
 	}
 	.proj-prev {
 		position: absolute;
