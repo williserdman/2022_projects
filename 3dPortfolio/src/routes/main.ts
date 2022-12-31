@@ -12,12 +12,8 @@ let cssRenderer: CSS3DRenderer;
 let camera: THREE.PerspectiveCamera;
 let screenCenter: THREE.Vector3 = new THREE.Vector3(0, 10.65 * SCALE, -10.65 * SCALE);
 
-const cameraEndPos = new THREE.Vector3(-0.7770185084587191, 434.6044300582179, 58.527510632008216);
-const cameraStartPos = new THREE.Vector3(
-	-2099.2246488333626,
-	1110.4891140553996,
-	2221.310294422909
-);
+const cameraEndPos = new THREE.Vector3(0, 10.65 * SCALE, 60);
+const cameraStartPos = new THREE.Vector3(-2100, 1110, 2220);
 
 const otherInfo = `
 {isEuler: true, _x: -0.30893971996719555, _y: -0.5001468311828967, _z: -0.1518754142208954, _order: 'XYZ', …}
@@ -109,7 +105,7 @@ function setup() {
 	scene.add(lightHelper, gridHelper);
 
 	// Initial setup for the controls
-	controls = new OrbitControls(camera, cssRenderer.domElement);
+	//controls = new OrbitControls(camera, cssRenderer.domElement);
 
 	//camera.position.set(-0.7 * SCALE, 23.5 * SCALE, 31.5 * SCALE);
 	//camera.rotation.set(-0.64, -0.02, -0.01);
