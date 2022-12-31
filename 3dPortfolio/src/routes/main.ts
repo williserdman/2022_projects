@@ -15,11 +15,6 @@ let screenCenter: THREE.Vector3 = new THREE.Vector3(0, 10.65 * SCALE, -10.65 * S
 const cameraEndPos = new THREE.Vector3(0, 10.65 * SCALE, 60);
 const cameraStartPos = new THREE.Vector3(-2100, 1110, 2220);
 
-const otherInfo = `
-{isEuler: true, _x: -0.30893971996719555, _y: -0.5001468311828967, _z: -0.1518754142208954, _order: 'XYZ', …}
-{isEuler: true, _x: -0.01395548132400472, _y: 0.001318569940072002, _z: 0.00001840246751468038, _order: 'XYZ', …}
-`;
-
 const scene = new THREE.Scene();
 
 let controls: OrbitControls;
