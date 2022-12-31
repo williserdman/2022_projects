@@ -1,6 +1,5 @@
 import * as THREE from "three";
-// @ts-ignore
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
 
@@ -23,7 +22,7 @@ const cameraStartPos = new THREE.Vector3(-2100, 1110, 2220);
 
 const scene = new THREE.Scene();
 
-let controls: OrbitControls;
+//let controls: OrbitControls;
 function setup() {
 	// Catches the window resize and updates the canvas
 	window.addEventListener(
@@ -41,7 +40,6 @@ function setup() {
 	cssRenderer.domElement.style.top = "0";
 	cssRenderer.domElement.style.left = "0";
 	cssRenderer.setSize(window.innerWidth, window.innerHeight);
-	//document.body.appendChild(document.createElement("div.css").appendChild(cssRenderer.domElement));
 	document.querySelector("#css")?.appendChild(cssRenderer.domElement);
 
 	renderer.setPixelRatio(window.devicePixelRatio);
@@ -51,7 +49,6 @@ function setup() {
 	renderer.domElement.style.top = "0";
 	renderer.domElement.style.left = "0";
 	document.querySelector("#webgl")?.appendChild(renderer.domElement);
-	//document.body.appendChild(document.createElement("div.webgl").appendChild(renderer.domElement)); // absolutely NO idea why this doesn't work
 	// renderer.shadowMap.enabled = true;
 
 	camera.position.set(cameraStartPos.x, cameraStartPos.y, cameraStartPos.z);
@@ -72,15 +69,11 @@ function setup() {
 		(e) => console.error(e)
 	);
 
-	/* document.addEventListener("keypress", () => {
-		console.log("pos:", camera.position, "rot:", camera.rotation);
-	}); */
-
 	const tmpMesh = new THREE.Mesh(
 		new THREE.BoxGeometry(10, 10, 10),
 		new THREE.MeshStandardMaterial()
 	);
-	scene.add(tmpMesh);
+	//scene.add(tmpMesh);
 	tmpMesh.position.set(0, 10.65 * SCALE, -10.65 * SCALE);
 
 	// Adds a couple basic lights to the scene
@@ -94,24 +87,10 @@ function setup() {
 	const lightHelper = new THREE.PointLightHelper(pointLight);
 	const gridHelper = new THREE.GridHelper(200, 50);
 	//scene.add(lightHelper, gridHelper);
-
-	// Initial setup for the controls
-	//controls = new OrbitControls(camera, cssRenderer.domElement);
-
-	//camera.position.set(-0.7 * SCALE, 23.5 * SCALE, 31.5 * SCALE);
-	//camera.rotation.set(-0.64, -0.02, -0.01);
-
-	//camera.position.set(0, 440, 120);
-	//camera.position.set(90, 380, 260);
-	//camera.rotation.set(-0.02, 0.14, 0.015);
 }
 
 function update(time: number) {
 	requestAnimationFrame(update);
-
-	//controls.update();
-
-	//console.log(camera.position, camera.rotation);
 
 	renderer.render(scene, camera);
 	cssRenderer.render(scene, camera);
@@ -162,8 +141,6 @@ function createLaptop() {
 	screen.css3dObject.element.src = "screen";
 	screen.position.set(0, 10.65 * SCALE, -10.65 * SCALE);
 	screenCenter = screen.position;
-	//screen.position.y = 10.65 * SCALE;
-	//screen.position.z -= 10.65 * SCALE;
 	group.add(screen);
 
 	return group;
@@ -174,7 +151,6 @@ function makeCSSObject(type: string, width: number, height: number) {
 	const el = document.createElement(type);
 	el.style.width = width + "px";
 	el.style.height = height + "px";
-	//el.style.opacity = "0.999";
 	el.style.boxSizing = "border-box";
 
 	const cssObj = new CSS3DObject(el);

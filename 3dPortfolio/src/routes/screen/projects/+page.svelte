@@ -1,10 +1,6 @@
 <script lang="ts">
 	import "bulma";
 
-	/* todo: fix bug where if you start dragging navbar then end up inside the app the click doesnt stop, ideas: add delay, add object that covers app while dragging 
-				add more projects 
-				might be able to render iframes at a certain resolution (1080p for instance) then use css scale to make them fit in the right place */
-
 	interface Project {
 		title: string;
 		desc: string;
