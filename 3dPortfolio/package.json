@@ -26,6 +26,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@types/gsap": "^3.0.0",
 		"@types/three": "^0.146.0",
 		"bulma": "^0.9.4",
 		"gsap": "^3.11.4",

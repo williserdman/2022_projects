@@ -3,7 +3,13 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
-import gsap from "gsap";
+
+//@ts-ignore
+import { gsap } from "gsap/dist/gsap";
+//@ts-ignore
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SCALE = 40;
 
@@ -70,16 +76,6 @@ function setup() {
 		console.log("pos:", camera.position, "rot:", camera.rotation);
 	}); */
 
-	document.addEventListener("mousedown", () => {
-		gsap.to(camera.position, {
-			x: cameraEndPos.x,
-			y: cameraEndPos.y,
-			z: cameraEndPos.z,
-			duration: 2,
-			onUpdate: () => camera.lookAt(screenCenter)
-		});
-	});
-
 	const tmpMesh = new THREE.Mesh(
 		new THREE.BoxGeometry(10, 10, 10),
 		new THREE.MeshStandardMaterial()
@@ -97,7 +93,7 @@ function setup() {
 	// Adds some helpers to the scene
 	const lightHelper = new THREE.PointLightHelper(pointLight);
 	const gridHelper = new THREE.GridHelper(200, 50);
-	scene.add(lightHelper, gridHelper);
+	//scene.add(lightHelper, gridHelper);
 
 	// Initial setup for the controls
 	//controls = new OrbitControls(camera, cssRenderer.domElement);
@@ -129,6 +125,23 @@ export function init() {
 	cssRenderer = new CSS3DRenderer();
 
 	setup();
+
+	gsap.timeline().to(camera.position, {
+		scrollTrigger: {
+			trigger: ".trigger",
+			start: "top top",
+			end: "+=800%",
+			scrub: 3,
+			markers: true,
+			immediateRender: false
+		},
+		x: cameraEndPos.x,
+		y: cameraEndPos.y,
+		z: cameraEndPos.z,
+		ease: "power4",
+		onUpdate: () => console.log("gsap go")
+	});
+
 	update(performance.now());
 }
 
