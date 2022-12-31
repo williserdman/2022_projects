@@ -115,7 +115,6 @@ function update(time: number) {
 
 	renderer.render(scene, camera);
 	cssRenderer.render(scene, camera);
-	camera.lookAt(screenCenter);
 }
 
 export function init() {
@@ -128,10 +127,10 @@ export function init() {
 
 	gsap.timeline().to(camera.position, {
 		scrollTrigger: {
-			trigger: ".trigger",
+			trigger: "#main",
 			start: "top top",
 			end: "+=800%",
-			scrub: 3,
+			scrub: true,
 			markers: true,
 			immediateRender: false
 		},
@@ -139,7 +138,7 @@ export function init() {
 		y: cameraEndPos.y,
 		z: cameraEndPos.z,
 		ease: "power4",
-		onUpdate: () => console.log("gsap go")
+		onUpdate: () => camera.lookAt(screenCenter)
 	});
 
 	update(performance.now());

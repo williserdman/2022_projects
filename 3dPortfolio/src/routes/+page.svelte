@@ -14,9 +14,6 @@
 </html>
 
 <style>
-	html {
-		height: 800%;
-	}
 	.trigger {
 		position: absolute;
 		height: 98%;
@@ -24,10 +21,6 @@
 	}
 	#webgl {
 		pointer-events: none;
-	}
-
-	html {
-		overflow: visible;
 	}
 
 	* {
