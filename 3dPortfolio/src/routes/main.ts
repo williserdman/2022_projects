@@ -110,7 +110,7 @@ export function init() {
 			start: "top top",
 			end: "+=800%",
 			scrub: true,
-			markers: true,
+			//markers: true,
 			immediateRender: false
 		},
 		x: cameraEndPos.x,
