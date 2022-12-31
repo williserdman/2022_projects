@@ -17,15 +17,20 @@
 	export let top = 100;
 	let moving = false;
 
+	let cover = false;
+
 	function mouseDownTop(e: object) {
-		//console.log("click 1");
+		//@ts-ignore
+		mainClick({ ...e, target: e.target.parentElement }); // propogation stopped in here
+
+		console.log("mdt");
+		cover = true;
 		//@ts-ignore
 		e.stopPropagation();
 		moving = true;
-		//@ts-ignore
-		mainClick({ ...e, target: e.target.parentElement }); // propogation stopped in here
 	}
 	function mouseUpTop() {
+		cover = false;
 		moving = false;
 	}
 	function mouseMoveTop(e: object) {
@@ -37,17 +42,19 @@
 		}
 	}
 	function mainClick(e: object) {
+		console.log("main click", type);
 		// local var focus for corresponding elment, and all others in $openApps
 		let lMax = -1;
 		$openApps.forEach((i) => {
 			if (i.focus > lMax) lMax = i.focus;
 		});
 
-		console.log($openApps);
+		//console.log($openApps);
 		focus = lMax + 1;
-		console.log($openApps);
+		//console.log($openApps);
 		//@ts-ignore
 		e.target.style["z-index"] = focus;
+		isFocus = true;
 
 		try {
 			//@ts-ignore
@@ -57,7 +64,13 @@
 			//console.error(err);
 		}
 	}
-	console.log($openApps);
+
+	let isFocus = true;
+	openApps.subscribe((oa) => {
+		oa.forEach((i) => {
+			if (i.focus > focus) isFocus = false;
+		});
+	});
 </script>
 
 <!-- top nav area of applet 
@@ -66,32 +79,43 @@ if things from svelte
 
 bottom stuff from applet (if needed idk yet) -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-	class="top"
-	style="top: {top}px; left: {left}px"
-	on:mousedown={mouseDownTop}
-	on:mouseup={mouseUpTop}
-/>
 <html
 	lang="html"
-	style="left: {left}px; top: {top}px; width: {width}px; height: {height}px; z-index: {focus + 1};"
+	style="top: {top - 30}px; left: {left}px; z-index: {focus + 1};"
 	hidden={minimized}
-	on:mousedown={mainClick}
 >
-	<main>
-		{#if type == "projects"}
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<iframe
-				src="screen/projects"
-				style="width: {bigWidth}px; height: {bigHeight}px; transform: translate(-{(bigWidth -
-					width) /
-					2}px, -{(bigHeight - height) / 2}px) scale({ratio});"
-			/>
-		{/if}
+	<div
+		class="no-focus-cover"
+		hidden={isFocus}
+		style="z-index: {focus + 1}; top: 30px;"
+		on:mousedown={mainClick}
+	/>
+	<div class="top" on:mousedown={mouseDownTop} />
+	<div
+		class="top-cover"
+		on:mouseup={mouseUpTop}
+		on:mousemove={mouseMoveTop}
+		on:mouseleave={mouseUpTop}
+		hidden={!cover}
+	/>
+	<main
+		lang="html"
+		style="left: {left}px; top: {top}px; width: {width}px; height: {height}px;"
+		on:mousedown={mainClick}
+	>
+		<div>
+			{#if type == "projects"}
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<iframe
+					src="screen/projects"
+					style="width: {bigWidth}px; height: {bigHeight}px; transform: translate(-{(bigWidth -
+						width) /
+						2}px, -{(bigHeight - height) / 2}px) scale({ratio});"
+				/>
+			{/if}
+		</div>
 	</main>
 </html>
-
-<svelte:window on:mousemove={mouseMoveTop} on:mouseup={mouseUpTop} on:mouseleave={mouseUpTop} />
 
 <style>
 	.top {
@@ -99,6 +123,23 @@ bottom stuff from applet (if needed idk yet) -->
 		height: 30px;
 		width: 100%;
 		background-color: lightgrey;
+	}
+
+	.no-focus-cover {
+		position: absolute;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background: rgba(0, 150, 0, 0);
+	}
+	.top-cover {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-color: rgba(255, 0, 0, 0);
+		z-index: 999999999999;
 	}
 	html {
 		position: relative;
