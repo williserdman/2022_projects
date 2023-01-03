@@ -1,7 +1,7 @@
 import * as THREE from "three";
+//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { CSS3DRenderer, CSS3DObject } from "three/examples/jsm/renderers/CSS3DRenderer";
-//import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 //@ts-ignore
 import { gsap } from "gsap/dist/gsap";
@@ -15,10 +15,10 @@ const SCALE = 40;
 let renderer: THREE.WebGLRenderer;
 let cssRenderer: CSS3DRenderer;
 let camera: THREE.PerspectiveCamera;
-let screenCenter: THREE.Vector3 = new THREE.Vector3(-3.23 * SCALE, 56 * SCALE, -11.5 * SCALE);
+let screenCenter: THREE.Vector3 = new THREE.Vector3(0, 10.65 * SCALE, -10.65 * SCALE);
 
 const cameraEndPos = new THREE.Vector3(0, 10.65 * SCALE, 60);
-const cameraStartPos = new THREE.Vector3(-3100, 3110, 2220);
+const cameraStartPos = new THREE.Vector3(-2100, 1110, 2220);
 
 const scene = new THREE.Scene();
 
@@ -54,21 +54,33 @@ function setup() {
 	camera.position.set(cameraStartPos.x, cameraStartPos.y, cameraStartPos.z);
 	camera.lookAt(screenCenter);
 
-	new GLTFLoader().load("desk_low-poly/scene.gltf", (gltf) => {
-		scene.add(gltf.scene);
-		gltf.scene.scale.set(SCALE / 5, SCALE / 5, SCALE / 5);
-		//gltf.scene.position.set()
-		gltf.scene.rotateOnAxis(new THREE.Vector3(0, 1, 0), -Math.PI / 2);
-	});
+	scene.add(createLaptop());
 
-	/* const tmpMesh = new THREE.Mesh(
-		new THREE.BoxGeometry(100, 100, 100),
+	new GLTFLoader().load(
+		"office_desk/scene.gltf",
+		(gltf) => {
+			console.log("Desk Added");
+			scene.add(gltf.scene);
+			//console.log(scene);
+			gltf.scene.scale.set(1.5 * SCALE, 1.5 * SCALE, 1.5 * SCALE);
+			gltf.scene.position.set(-52 * SCALE, -46.6 * SCALE, 12 * SCALE);
+		},
+		(p) => console.log(p),
+		(e) => console.error(e)
+	);
+
+	/* 	new GLTFLoader().load("desk_low-poly/scene.gltf", (gltf) => {
+		scene.add(gltf.scene);
+		//gltf.scene.scale.set()
+		//gltf.scene.position.set()
+	}); */
+
+	const tmpMesh = new THREE.Mesh(
+		new THREE.BoxGeometry(10, 10, 10),
 		new THREE.MeshStandardMaterial()
-	); */
+	);
 	//scene.add(tmpMesh);
-	//tmpMesh.position.set(-3 * SCALE, 55.5 * SCALE, -11 * SCALE);
-	screenCenter = new THREE.Vector3(-3.23 * SCALE, 55.35 * SCALE, -11.24 * SCALE);
-	createScreen(screenCenter);
+	tmpMesh.position.set(0, 10.65 * SCALE, -10.65 * SCALE);
 
 	// Adds a couple basic lights to the scene
 	const pointLight = new THREE.PointLight(0xffffff);
@@ -81,14 +93,10 @@ function setup() {
 	const lightHelper = new THREE.PointLightHelper(pointLight);
 	const gridHelper = new THREE.GridHelper(200, 50);
 	//scene.add(lightHelper, gridHelper);
-
-	//controls = new OrbitControls(camera, cssRenderer.domElement);
 }
 
 function update(time: number) {
 	requestAnimationFrame(update);
-
-	//controls.update();
 
 	renderer.render(scene, camera);
 	cssRenderer.render(scene, camera);
@@ -111,9 +119,9 @@ export function init() {
 			//markers: true,
 			immediateRender: false
 		},
-		x: screenCenter.x,
-		y: screenCenter.y,
-		z: 60,
+		x: cameraEndPos.x,
+		y: cameraEndPos.y,
+		z: cameraEndPos.z,
 		ease: "power4",
 		onUpdate: () => camera.lookAt(screenCenter)
 	});
@@ -121,15 +129,27 @@ export function init() {
 	update(performance.now());
 }
 
-function createScreen(pos: THREE.Vector3) {
-	const screen = makeCSSObject("iframe", 32 * SCALE, 18 * SCALE);
+function createLaptop() {
+	const group = new THREE.Group();
+	new GLTFLoader().load(
+		"laptop/scene.gltf",
+		(gltf) => {
+			console.log("Laptop Added.");
+			group.add(gltf.scene);
+			gltf.scene.scale.set(1 * SCALE, 1 * SCALE, 1 * SCALE);
+		},
+		(p) => console.log(p),
+		(e) => console.error(e)
+	);
+
+	const screen = makeCSSObject("iframe", 29.5 * SCALE, 17.15 * SCALE);
 	// @ts-ignore
 	screen.css3dObject.element.src = "screen";
-	screen.position.set(pos.x, pos.y, pos.z);
+	screen.position.set(0, 10.65 * SCALE, -10.65 * SCALE);
 	screenCenter = screen.position;
-	scene.add(screen);
-	screenCenter = pos;
-	return screen;
+	group.add(screen);
+
+	return group;
 }
 
 function makeCSSObject(type: string, width: number, height: number) {
