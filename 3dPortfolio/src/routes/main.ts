@@ -54,6 +54,7 @@ function setup() {
 	camera.position.set(cameraStartPos.x, cameraStartPos.y, cameraStartPos.z);
 	camera.lookAt(screenCenter);
 
+	// for credit: "Desk Low-Poly" (https://skfb.ly/6RTZN) by Pedro Silva is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 	new GLTFLoader().load("desk_low-poly/scene.gltf", (gltf) => {
 		scene.add(gltf.scene);
 		gltf.scene.scale.set(SCALE / 5, SCALE / 5, SCALE / 5);
