@@ -65,6 +65,12 @@
 		}
 	}
 
+	function closeApp() {}
+
+	function minimizeApp() {}
+
+	function maximizeApp() {}
+
 	let isFocus = true;
 	openApps.subscribe((oa) => {
 		oa.forEach((i) => {
@@ -81,7 +87,7 @@ bottom stuff from applet (if needed idk yet) -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <html
 	lang="html"
-	style="top: {top - 30}px; left: {left}px; z-index: {focus + 1};"
+	style="top: {top - 30}px; left: {left}px; z-index: {focus + 1}; border-radius: 10px;"
 	hidden={minimized}
 >
 	<div
@@ -90,7 +96,53 @@ bottom stuff from applet (if needed idk yet) -->
 		style="z-index: {focus + 1}; top: 30px;"
 		on:mousedown={mainClick}
 	/>
-	<div class="top" on:mousedown={mouseDownTop} />
+	<div class="top" on:mousedown={mouseDownTop}>
+		<div>
+			<!-- svelte-ignore a11y-mouse-events-have-key-events -->
+			<div
+				id="close-button"
+				style="position: relative; top: 10px; left: 10px; width: 10px; height: 10px; border-radius: 5px; background-color: red;"
+				on:mouseenter={(e) => {
+					//@ts-ignore
+					e.target.innerHTML =
+						'<p style="position: absolute; top: -3.2px; left: 2.2px; font-weight: bolder; color: #8a0000; font-size: 10px;">x</p>';
+				}}
+				on:mouseleave={(e) => {
+					//@ts-ignore
+					e.target.innerHTML = "";
+				}}
+				on:click={closeApp}
+			/>
+			<div
+				id="minimize-button"
+				style="position: absolute; top: 10px; left: 25px; width: 10px; height: 10px; border-radius: 5px; background-color: orange;"
+				on:mouseenter={(e) => {
+					//@ts-ignore
+					e.target.innerHTML =
+						'<p style="position: absolute; top: -9.6px; left: 0.8px; font-weight: bolder; color: #b57b0d; font-size: 18px;">-</p>';
+				}}
+				on:mouseleave={(e) => {
+					//@ts-ignore
+					e.target.innerHTML = "";
+				}}
+				on:click={minimizeApp}
+			/>
+			<div
+				id="maximize-button"
+				style="position: absolute; top: 10px; left: 40px; width: 10px; height: 10px; border-radius: 5px; background-color: hsl(126.8, 100%, 36.3%);"
+				on:mouseenter={(e) => {
+					//@ts-ignore
+					e.target.innerHTML =
+						'<p style="position: absolute; top: -8.6px; left: -0.3px; font-weight: bolder; color: #091;">+</p>';
+				}}
+				on:mouseleave={(e) => {
+					//@ts-ignore
+					e.target.innerHTML = "";
+				}}
+				on:click={closeApp}
+			/>
+		</div>
+	</div>
 	<div
 		class="top-cover"
 		on:mouseup={mouseUpTop}
