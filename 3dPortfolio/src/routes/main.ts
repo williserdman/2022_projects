@@ -44,7 +44,7 @@ function setup() {
 
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.setClearColor(0xecf8ff);
+	renderer.setClearColor(0x330033);
 	renderer.domElement.style.position = "absolute";
 	renderer.domElement.style.top = "0";
 	renderer.domElement.style.left = "0";
