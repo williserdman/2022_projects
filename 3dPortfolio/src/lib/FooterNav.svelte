@@ -41,7 +41,7 @@
 				src="start_button.webp"
 				alt="start"
 				on:click={() => handle("start")}
-				style="width; 2rem; height: 2rem;"
+				style="width; 32px; height: 32px;"
 			/>
 		</div>
 		<div class="my-col" bind:this={fileExplorerEl}>
@@ -51,7 +51,7 @@
 				src="file_explorer.png"
 				alt="projects"
 				on:click={() => handle("projects")}
-				style="width; 2rem; height: 2rem;"
+				style="width; 32px; height: 32px;"
 			/>
 		</div>
 		<div class="my-col" bind:this={settingsEl}>
@@ -61,7 +61,7 @@
 				src="settings_cog.png"
 				alt="settings"
 				on:click={() => handle("settings")}
-				style="width; 2rem; height: 2rem;"
+				style="width; 32px; height: 32px;"
 			/>
 		</div>
 	</div>
@@ -80,13 +80,13 @@
 		align-self: center;
 	}
 	.my-col {
-		height: 3rem;
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
-		padding-left: 0.5rem;
-		padding-right: 0.5rem;
-		margin-left: 0.2rem;
-		margin-right: 0.2rem;
+		height: 48px;
+		padding-top: 8px;
+		padding-bottom: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+		margin-left: 3.2px;
+		margin-right: 3.2px;
 	}
 	.my-col:hover {
 		background-color: lightblue !important; /* needed to overrule the js */

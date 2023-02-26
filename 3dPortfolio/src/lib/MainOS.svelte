@@ -1,4 +1,6 @@
 <script lang="ts">
+	let htmlWidth: number;
+	let htmlHeight: number;
 	import AppletWrapper from "./AppletWrapper.svelte";
 	import { openApps } from "./modules/stores";
 
@@ -10,11 +12,20 @@
 	}
 </script>
 
-<html lang="html" on:mousedown on:mousemove on:mouseup on:mouseleave>
+<html
+	lang="html"
+	on:mousedown
+	on:mousemove
+	on:mouseup
+	on:mouseleave
+	bind:clientWidth={htmlWidth}
+	bind:clientHeight={htmlHeight}
+>
 	<div class="apps">
 		{#each $openApps as s}
 			<div class="app">
-				<AppletWrapper {...{ ...s, width: w2, height: h2 }} bind:focus={s.focus} />
+				<AppletWrapper {...{ ...s, htmlWidth, htmlHeight }} bind:focus={s.focus} />
+				<!-- {...{ ...s, width: w2, height: h2 }} since width and height get changed within the wrapper, these would have to be bound if they need to be accessed here-->
 			</div>
 		{/each}
 	</div>

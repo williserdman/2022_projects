@@ -1,25 +1,33 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { openApps } from "./modules/stores";
 	export let type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
 	export let width: number = 800;
-	let ratio: number, bigHeight: number, bigWidth: number;
-	$: {
-		ratio = height / width;
-		bigWidth = 1280;
-		bigHeight = bigWidth * ratio;
-		ratio = height / bigHeight;
-		// console.log(ratio);
-	}
+	let ratio: number;
+	let bigHeight: number = 1080;
+	const bigWidth: number = 1920;
+	let main: HTMLElement | null;
 	export let height: number = 600;
 	export let minimized: boolean = false;
 	export let focus: number;
 	export let left = 100;
 	export let top = 100;
+	export let htmlHeight: number;
+	export let htmlWidth: number;
 	let moving = false;
 
 	let cover = false;
 
+	let mounted = false;
+
+	$: {
+		ratio = height / width;
+		bigHeight = bigWidth * ratio;
+		ratio = height / bigHeight;
+	}
+
 	function mouseDownTop(e: object) {
+		console.log(width, "start of mdt");
 		//@ts-ignore
 		mainClick({ ...e, target: e.target.parentElement }); // propogation stopped in here
 
@@ -28,6 +36,7 @@
 		//@ts-ignore
 		e.stopPropagation();
 		moving = true;
+		console.log(width, "end of mdt");
 	}
 	function mouseUpTop() {
 		cover = false;
@@ -39,6 +48,7 @@
 			left += e.movementX;
 			//@ts-ignore
 			top += e.movementY;
+			top < 30 ? (top = 30) : {};
 		}
 	}
 	function mainClick(e: object) {
@@ -69,7 +79,15 @@
 
 	function minimizeApp() {}
 
-	function maximizeApp() {}
+	function maximizeApp(e: object) {
+		width = htmlWidth;
+		height = htmlHeight - 80; // should accound for size of navbar
+		left = 0;
+		top = 30;
+		console.log("making big");
+		//@ts-ignore
+		e.stopPropagation();
+	}
 
 	let isFocus = true;
 	openApps.subscribe((oa) => {
@@ -111,7 +129,7 @@ bottom stuff from applet (if needed idk yet) -->
 					//@ts-ignore
 					e.target.innerHTML = "";
 				}}
-				on:click={closeApp}
+				on:mousedown={closeApp}
 			/>
 			<div
 				id="minimize-button"
@@ -125,7 +143,7 @@ bottom stuff from applet (if needed idk yet) -->
 					//@ts-ignore
 					e.target.innerHTML = "";
 				}}
-				on:click={minimizeApp}
+				on:mousedown={minimizeApp}
 			/>
 			<div
 				id="maximize-button"
@@ -139,7 +157,7 @@ bottom stuff from applet (if needed idk yet) -->
 					//@ts-ignore
 					e.target.innerHTML = "";
 				}}
-				on:click={closeApp}
+				on:mousedown={maximizeApp}
 			/>
 		</div>
 	</div>
@@ -154,6 +172,7 @@ bottom stuff from applet (if needed idk yet) -->
 		lang="html"
 		style="left: {left}px; top: {top}px; width: {width}px; height: {height}px;"
 		on:mousedown={mainClick}
+		bind:this={main}
 	>
 		<div>
 			{#if type == "projects"}
