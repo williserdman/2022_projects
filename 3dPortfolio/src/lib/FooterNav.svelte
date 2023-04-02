@@ -58,7 +58,7 @@
 				draggable="false"
 				src="start_button.webp"
 				alt="start"
-				on:click={() => handle("start")}
+				on:mousedown={() => handle("start")}
 				style="width; 32px; height: 32px;"
 			/>
 		</div>
@@ -68,7 +68,7 @@
 				draggable="false"
 				src="file_explorer.png"
 				alt="projects"
-				on:click={() => handle("projects")}
+				on:mousedown={() => handle("projects")}
 				style="width; 32px; height: 32px;"
 			/>
 		</div>
@@ -78,7 +78,7 @@
 				draggable="false"
 				src="settings_cog.png"
 				alt="settings"
-				on:click={() => handle("settings")}
+				on:mousedown={() => handle("settings")}
 				style="width; 32px; height: 32px;"
 			/>
 		</div>

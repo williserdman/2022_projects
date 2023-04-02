@@ -78,7 +78,7 @@
 	function closeApp() {}
 
 	function minimizeApp(e: object) {
-		console.log("minimizing");
+		//console.log("minimizing");
 		minimized = !minimized;
 		//@ts-ignore
 		e.stopPropagation();
