@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { openApps } from "./modules/stores";
+	import { createEventDispatcher } from "svelte";
 	export let type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
 	export let width: number = 800;
 	let ratio: number;
@@ -75,7 +76,26 @@
 		}
 	}
 
-	function closeApp() {}
+	const dispatch = createEventDispatcher();
+	function closeApp() {
+		let indexOfThisApp;
+		let index = 0;
+		$openApps.forEach((item) => {
+			console.log(item);
+			if (item.type == type) {
+				console.log("returning", index);
+				indexOfThisApp = index;
+			}
+			++index;
+		});
+
+		console.log(indexOfThisApp);
+		//console.log(indexOfThisApp);
+
+		dispatch("selfDestruct", {
+			targetIndex: indexOfThisApp
+		});
+	}
 
 	function minimizeApp(e: object) {
 		//console.log("minimizing");

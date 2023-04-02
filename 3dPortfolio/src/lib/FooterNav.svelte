@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { openApps } from "./modules/stores";
 
 	const getTopFocus = () => {
@@ -40,13 +41,21 @@
 	}
 
 	let startButtonEl: HTMLDivElement, fileExplorerEl: HTMLDivElement, settingsEl: HTMLDivElement;
+	let mounted = false;
+	onMount(() => (mounted = true));
 	$: {
-		//@ts-ignore
-		if ($openApps.some((v) => v.type == "start")) startButtonEl.style.background = "lightgrey";
-		//@ts-ignore
-		if ($openApps.some((v) => v.type == "projects")) fileExplorerEl.style.background = "lightgrey";
-		//@ts-ignore
-		if ($openApps.some((v) => v.type == "settings")) settingsEl.style.background = "lightgrey";
+		if (mounted) {
+			//@ts-ignore
+			if ($openApps.some((v) => v.type == "start")) startButtonEl.style.background = "lightgrey";
+			else startButtonEl.style.background = "none";
+			//@ts-ignore
+			if ($openApps.some((v) => v.type == "projects"))
+				fileExplorerEl.style.background = "lightgrey";
+			else fileExplorerEl.style.background = "none";
+			//@ts-ignore
+			if ($openApps.some((v) => v.type == "settings")) settingsEl.style.background = "lightgrey";
+			else settingsEl.style.background = "none";
+		}
 	}
 </script>
 
