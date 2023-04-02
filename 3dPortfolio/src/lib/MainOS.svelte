@@ -24,7 +24,11 @@
 	<div class="apps">
 		{#each $openApps as s}
 			<div class="app">
-				<AppletWrapper {...{ ...s, htmlWidth, htmlHeight }} bind:focus={s.focus} />
+				<AppletWrapper
+					{...{ ...s, htmlWidth, htmlHeight }}
+					bind:focus={s.focus}
+					bind:minimized={s.minimized}
+				/>
 				<!-- {...{ ...s, width: w2, height: h2 }} since width and height get changed within the wrapper, these would have to be bound if they need to be accessed here-->
 			</div>
 		{/each}

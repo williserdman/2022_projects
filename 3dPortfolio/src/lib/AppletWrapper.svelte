@@ -27,16 +27,16 @@
 	}
 
 	function mouseDownTop(e: object) {
-		console.log(width, "start of mdt");
+		//console.log(width, "start of mdt");
 		//@ts-ignore
 		mainClick({ ...e, target: e.target.parentElement }); // propogation stopped in here
 
-		console.log("mdt");
+		//console.log("mdt");
 		cover = true;
 		//@ts-ignore
 		e.stopPropagation();
 		moving = true;
-		console.log(width, "end of mdt");
+		//console.log(width, "end of mdt");
 	}
 	function mouseUpTop() {
 		cover = false;
@@ -52,7 +52,7 @@
 		}
 	}
 	function mainClick(e: object) {
-		console.log("main click", type);
+		//console.log("main click", type);
 		// local var focus for corresponding elment, and all others in $openApps
 		let lMax = -1;
 		$openApps.forEach((i) => {
@@ -77,14 +77,19 @@
 
 	function closeApp() {}
 
-	function minimizeApp() {}
+	function minimizeApp(e: object) {
+		console.log("minimizing");
+		minimized = !minimized;
+		//@ts-ignore
+		e.stopPropagation();
+	}
 
 	function maximizeApp(e: object) {
 		width = htmlWidth;
 		height = htmlHeight - 80; // should accound for size of navbar
 		left = 0;
 		top = 30;
-		console.log("making big");
+		//console.log("making big");
 		//@ts-ignore
 		e.stopPropagation();
 	}
@@ -97,6 +102,8 @@
 	});
 </script>
 
+<!-- svelte-ignore non-top-level-reactive-declaration -->
+<!-- svelte-ignore non-top-level-reactive-declaration -->
 <!-- top nav area of applet 
 
 if things from svelte

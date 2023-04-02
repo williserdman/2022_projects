@@ -1,23 +1,41 @@
 <script lang="ts">
 	import { openApps } from "./modules/stores";
 
+	const getTopFocus = () => {
+		// messy but makes focus the greatest val out there
+		let m = -1;
+		$openApps.forEach((i) => {
+			if (i.focus > m) m = i.focus;
+		});
+		return ++m;
+	};
+
 	function handle(type: string) {
 		//@ts-ignore
 		if (!$openApps.some((v) => v.type == type)) {
+			//if it's not already open
 			//@ts-ignore
 			$openApps.push({
 				type: type,
-				focus: (() => {
-					// messy but makes focus the greatest val out there
-					let m = -1;
-					$openApps.forEach((i) => {
-						if (i.focus > m) m = i.focus;
-					});
-					return ++m;
-				})(),
+				focus: getTopFocus(),
 				minimized: false
 			});
 			$openApps = $openApps;
+		} else {
+			// if it is already open
+			console.log("already open", type);
+			$openApps.forEach((openApp) => {
+				if (openApp.type == type) {
+					// this assumes only one instance of each app open at any time, could use some for of IDs to have multiple apps open of the same type, kinda the purpose of oop
+					openApp.minimized = !openApp.minimized;
+					console.log(openApp.minimized);
+					if (openApp.minimized == false) {
+						openApp.focus = getTopFocus();
+					}
+				}
+			});
+
+			$openApps = $openApps; // NEED the AppletWrapper to "react" to the minimized change, this forces it
 		}
 	}
 

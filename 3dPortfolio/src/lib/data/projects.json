@@ -20,6 +20,13 @@
 			"abrDesc": "Real time chat application that uses Firebase (backend) and React (frontend)",
 			"link": "https://goofy-khorana-0fd1fa.netlify.app/",
 			"githubLink": "https://github.com/williserdman/webdevelopment/tree/main/OtherLearning/react/ChatReactApp"
+		},
+		{
+			"title": "Artificial Life Sim. - 3D BOIDS",
+			"desc": "",
+			"abrDesc": "",
+			"link": "",
+			"githubLink": ""
 		}
 	]
 }
