@@ -11,9 +11,11 @@
 		h2 = height / 1.5;
 	}
 	function killEl(e: object) {
+		//console.log($openApps);
 		//@ts-ignore
 		console.log($openApps.splice(e.detail.targetIndex, 1));
 		$openApps = $openApps;
+		//console.log($openApps);
 	}
 </script>
 
@@ -34,6 +36,8 @@
 					bind:focus={s.focus}
 					bind:minimized={s.minimized}
 					on:selfDestruct={killEl}
+					bind:top={s.top}
+					bind:left={s.left}
 				/>
 				<!-- {...{ ...s, width: w2, height: h2 }} since width and height get changed within the wrapper, these would have to be bound if they need to be accessed here-->
 			</div>
