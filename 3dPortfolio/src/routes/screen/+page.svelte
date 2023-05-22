@@ -25,7 +25,11 @@
 		if (selector) selector.hidden = true;
 		if (canvas) canvas.style.cursor = "default";
 	}
+	let folder1InFocus = false;
+	let folder2InFocus = false;
 	function click() {
+		folder1InFocus = false;
+		folder2InFocus = false;
 		console.log("firing main");
 		//@ts-ignore
 		canvas = this;
@@ -60,6 +64,8 @@
 				on:mousemove={mouseMoved}
 				on:mouseup={mouseUp}
 				on:mouseleave={mouseUp}
+				bind:gamesActive={folder1InFocus}
+				bind:otherActive={folder2InFocus}
 			/>
 		</div>
 		<div class="selector" bind:this={selector} hidden />
