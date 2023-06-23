@@ -22,11 +22,11 @@
 			"githubLink": "https://github.com/williserdman/webdevelopment/tree/main/OtherLearning/react/ChatReactApp"
 		},
 		{
-			"title": "Artificial Life Sim. - 3D BOIDS",
-			"desc": "",
-			"abrDesc": "",
-			"link": "",
-			"githubLink": ""
+			"title": "Artificial Life Sim. - BOIDS",
+			"desc": "Based on Craig Reynolds rules for his BOIDS (bird-oid objects). Wikipedia says: \"Boids is an example of emergent behavior; that is, the complexity of Boids arises from the interaction of individual agents (the boids, in this case) adhering to a set of simple rules.\" \n seperation \n alignment \n cohesion",
+			"abrDesc": "A flocking simulation where each orb represents a bird-oid object",
+			"link": "https://serene-chandrasekhar-c842ce.netlify.app/",
+			"githubLink": "https://github.com/williserdman/webdevelopment/tree/main"
 		}
 	]
 }

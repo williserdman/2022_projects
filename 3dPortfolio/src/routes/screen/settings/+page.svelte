@@ -3,7 +3,5 @@
 </script>
 
 <html lang="en">
-	<section class="container my-6">
-		<div class="box">hfdh</div>
-	</section>
+	<p>fjkdlajfklsdajfkldajfklsdaklfjsdao</p>
 </html>
