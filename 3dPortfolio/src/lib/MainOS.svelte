@@ -31,40 +31,7 @@
 	bind:clientWidth={htmlWidth}
 	bind:clientHeight={htmlHeight}
 >
-	<div style="position: absolute;">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<figure
-			class="image is-64x64"
-			style="height: 75px; width: 120px; top: 60px; left: 20px;"
-			class:folder-active={gamesActive}
-			on:click={() => {
-				console.log("clicl");
-				gamesActive = true;
-				otherActive = false;
-			}}
-		>
-			<div class="image is-64x64" style="position: relative; left:30px;">
-				<img src="/desktop_folder.png" alt="games" />
-				<p style="position: relative; top: -15px; left: 7px;">games</p>
-			</div>
-		</figure>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<figure
-			class="image is-64x64"
-			style="height: 75px; width: 120px; top: 75px; left: 20px;"
-			class:folder-active={otherActive}
-			on:click={() => {
-				console.log("clicl");
-				gamesActive = false;
-				otherActive = true;
-			}}
-		>
-			<div class="image is-64x64" style="position: relative; left:30px;">
-				<img src="/desktop_folder.png" alt="other_projects" />
-				<p style="position: relative; top: -15px; left: -23px;">other_projects</p>
-			</div>
-		</figure>
-	</div>
+	
 	<div class="apps">
 		{#each $openApps as s}
 			<div class="app">
