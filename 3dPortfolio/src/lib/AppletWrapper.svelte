@@ -5,8 +5,8 @@
 	export let type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
 	export let width: number = 800;
 	let ratio: number;
-	let bigHeight: number = 1080;
-	const bigWidth: number = 1920;
+	let bigHeight: number = 720;
+	const bigWidth: number = 1280;
 	let main: HTMLElement | null;
 	export let height: number = 600;
 	export let minimized: boolean = false;
