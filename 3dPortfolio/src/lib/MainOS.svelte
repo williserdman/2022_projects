@@ -64,7 +64,7 @@
 				<p style="position: relative; top: -15px; left: -23px;">other_projects</p>
 			</div>
 		</figure>
-	</div> -->
+	</div>
 	<div class="apps">
 		{#each $openApps as s}
 			<div class="app">
