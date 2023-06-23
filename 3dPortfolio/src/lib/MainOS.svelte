@@ -31,8 +31,8 @@
 	bind:clientWidth={htmlWidth}
 	bind:clientHeight={htmlHeight}
 >
-<!--
 	<div style="position: absolute;">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<figure
 			class="image is-64x64"
 			style="height: 75px; width: 120px; top: 60px; left: 20px;"
@@ -48,6 +48,7 @@
 				<p style="position: relative; top: -15px; left: 7px;">games</p>
 			</div>
 		</figure>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<figure
 			class="image is-64x64"
 			style="height: 75px; width: 120px; top: 75px; left: 20px;"
