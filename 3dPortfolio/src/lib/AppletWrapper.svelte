@@ -5,8 +5,8 @@
 	export let type: string = ""; // prop caught by svelte... ignore squiglies, vscode doesn't know what's up
 	export let width: number = 800;
 	let ratio: number;
-	let bigHeight: number = 1080;
-	const bigWidth: number = 1920;
+	let bigHeight: number = 720;
+	const bigWidth: number = 1280;
 	let main: HTMLElement | null;
 	export let height: number = 600;
 	export let minimized: boolean = false;
@@ -210,6 +210,8 @@ bottom stuff from applet (if needed idk yet) -->
 						width) /
 						2}px, -{(bigHeight - height) / 2}px) scale({ratio});"
 				/>
+			{:else}
+				<p class="has-text-white m-3">This project is one that I consider a "long-term project." Which is my way of saying that I'm aware that it's not quite ready for production. I promise something is in the works for this page, it's just not quite polished enough to publish!</p>
 			{/if}
 		</div>
 	</main>
